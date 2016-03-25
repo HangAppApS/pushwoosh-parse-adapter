@@ -1,0 +1,19 @@
+{
+  "name": "pushwoosh-parse-adapter",
+  "version": "1.0.0",
+  "description": "Pushwoosh parser server adapter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pushwoosh/pushwoosh-parse-adapter.git"
+  },
+  "author": "Deonis Peretyagin <karudo@gmail.com> (https://github.com/karudo)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pushwoosh/pushwoosh-parse-adapter/issues"
+  },
+  "homepage": "https://github.com/Pushwoosh/pushwoosh-parse-adapter#readme"
+}
