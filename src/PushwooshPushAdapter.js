@@ -6,9 +6,6 @@ if (process.env.VERBOSE || process.env.VERBOSE_PARSE_SERVER_PUSH_ADAPTER) {
 }
 const LOG_PREFIX = 'pushwoosh-parse-adapter';
 
-import Parse from 'parse';
-
-
 const defaultMaxTokensPerRequest = 1000;
 
 export class PushwooshPushAdapter {
@@ -25,7 +22,7 @@ export class PushwooshPushAdapter {
 
     const {applicationCode, apiAccessKey, maxTokensPerRequest = defaultMaxTokensPerRequest} = pushConfig;
     if (!applicationCode || !apiAccessKey) {
-      throw new Parse.Error("Trying to initialize PushwooshPushAdapter without applicationCode or apiAccessKey");
+      throw new Error('Trying to initialize PushwooshPushAdapter without applicationCode or apiAccessKey');
     }
     this.maxTokensPerRequest = maxTokensPerRequest;
     this.pushwooshConfig = {
@@ -102,6 +99,7 @@ export class PushwooshPushAdapter {
   }
 
   sendRequest(notification) {
+    log.verbose(LOG_PREFIX, 'send push to %d devices', notification.devices.length);
     const pushwooshRequest = {
       request: {
         ...this.pushwooshConfig,
@@ -117,14 +115,14 @@ export class PushwooshPushAdapter {
       } else {
         let responceText = '';
         res.setEncoding('utf8');
-        res.on('data', dataChunk => responceText += dataChunk)
-        res.on('end', () => log.error(responceText));
+        res.on('data', dataChunk => responceText += dataChunk);
+        res.on('end', () => log.error(LOG_PREFIX, new Error(responceText)));
         promise.reject('Pushwoosh Error');
       }
     });
     request.on('error', function(e) {
-      let err = new Parse.Error(`Error connecting to Pushwoosh: ${e}`);
-      log.error(err);
+      let err = new Error(`Error connecting to Pushwoosh: ${e}`);
+      log.error(LOG_PREFIX, err);
       promise.reject(err);
     });
     request.end(JSON.stringify(pushwooshRequest));
@@ -134,4 +132,3 @@ export class PushwooshPushAdapter {
 }
 
 export default PushwooshPushAdapter;
-module.exports = PushwooshPushAdapter;
