@@ -1,6 +1,6 @@
 {
   "name": "pushwoosh-parse-adapter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pushwoosh parser server adapter",
   "main": "lib/index.js",
   "files": [
