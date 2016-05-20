@@ -1,8 +1,6 @@
 'use strict';
 
-import Parse from 'parse';
-
-const PushwooshPushAdapter = require('../src/PushwooshPushAdapter');
+const {PushwooshPushAdapter} = require('../src/PushwooshPushAdapter');
 
 const pushConfig = {
   applicationCode: 'APP CODE',
@@ -184,7 +182,7 @@ describe('PushwooshPushAdapter', () => {
 
 
   describe('test sendRequest', () => {
-    const notification = 'notification';
+    const notification = {devices:[]};
     const pushwooshConfig = {pushwooshConfig: 'pushwooshConfig'};
     let pushwooshPushAdapter, requestResult;
 

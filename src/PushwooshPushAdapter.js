@@ -1,4 +1,5 @@
 "use strict";
+import Parse from 'parse';
 
 import log from 'npmlog';
 if (process.env.VERBOSE || process.env.VERBOSE_PARSE_SERVER_PUSH_ADAPTER) {
@@ -61,7 +62,7 @@ export class PushwooshPushAdapter {
       send_date: 'now',
       devices: devices
     };
-    const {badge, alert, sound, title, uri, 'content-available': contentAvailable, ...customData} = data;
+    const {badge, alert, sound, title, uri, 'content-available': contentAvailable, category, ...customData} = data;
 
     if (typeof badge !== 'undefined' && badge !== null) {
       if (badge === 'Increment') {
@@ -84,12 +85,15 @@ export class PushwooshPushAdapter {
     if (uri) {
       notification['link'] = uri;
     }
-    if (contentAvailable == 1) {
-      notification['ios_root_params'] = {
-        aps: {
-          'content-available': '1'
-        }
-      };
+    if (contentAvailable == 1 || category) {
+      let aps = {};
+      if (contentAvailable == 1) {
+        aps['content-available'] = '1';
+      }
+      if (category) {
+        aps['category'] = category;
+      }
+      notification['ios_root_params'] = {aps};
     }
     if (Object.keys(customData).length > 0) {
       notification['data'] = customData;
