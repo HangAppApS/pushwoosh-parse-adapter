@@ -1,6 +1,6 @@
 {
   "name": "pushwoosh-parse-adapter",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Pushwoosh parser server adapter",
   "main": "lib/index.js",
   "files": [
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pushwoosh/pushwoosh-parse-adapter.git"
+    "url": "git+https://github.com/HangAppApS/pushwoosh-parse-adapter.git"
   },
   "author": "Deonis Peretyagin <karudo@gmail.com> (https://github.com/karudo)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Pushwoosh/pushwoosh-parse-adapter/issues"
+    "url": "https://github.com/HangAppApS/pushwoosh-parse-adapter/issues"
   },
-  "homepage": "https://github.com/Pushwoosh/pushwoosh-parse-adapter#readme",
+  "homepage": "https://github.com/HangAppApS/pushwoosh-parse-adapter#readme",
   "dependencies": {
     "npmlog": "^2.0.3",
     "parse": "^1.8.1"
