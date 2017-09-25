@@ -62,7 +62,7 @@ export class PushwooshPushAdapter {
       send_date: 'now',
       devices: devices
     };
-    const {badge, alert, sound, title, uri, 'content-available': contentAvailable, category, ...customData} = data;
+    const {badge, alert, sound, title, uri, 'content-available': contentAvailable, 'mutable-content': mutableContent, category, ...customData} = data;
 
     if (typeof badge !== 'undefined' && badge !== null) {
       if (badge === 'Increment') {
@@ -85,16 +85,19 @@ export class PushwooshPushAdapter {
     if (uri) {
       notification['link'] = uri;
     }
-    if (contentAvailable == 1 || category) {
-      let aps = {};
-      if (contentAvailable == 1) {
+    
+	let aps = {};
+    if (contentAvailable == 1) {
         aps['content-available'] = '1';
-      }
-      if (category) {
-        aps['category'] = category;
-      }
-      notification['ios_root_params'] = {aps};
     }
+    if (mutableContent == 1) {
+        aps['mutable-content'] = '1';
+    }
+    if (category) {
+      aps['category'] = category;
+	}
+    notification['ios_root_params'] = {aps};
+    
     if (Object.keys(customData).length > 0) {
       notification['data'] = customData;
     }
