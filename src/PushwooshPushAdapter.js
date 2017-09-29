@@ -85,17 +85,17 @@ export class PushwooshPushAdapter {
     if (uri) {
       notification['link'] = uri;
     }
-    let aps = {};
+    var  aps = {};
     if (contentAvailable == 1) {
-      aps['content-available'] = '1';
+      aps['content-available'] = 1;
     }
     if (mutableContent == 1) {
-      aps['mutable-content'] = '1';
+      aps['mutable-content'] = 1;
     }
     if (category) {
       aps['category'] = category;
     }
-    notification['ios_root_params'] = {aps};
+    notification['ios_root_params'] = { aps: aps };
     
     if (Object.keys(customData).length > 0) {
       notification['data'] = customData;
